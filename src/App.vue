@@ -1,30 +1,89 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div class="root">
+    <Panel
+        v-on:displaySessionChooser="displaySessionChooser = true"
+        v-on:displayUserChooser="displayUserChooser = true"
+        :user="activeUser"
+        :session="activeSession"></Panel>
   </div>
-  <router-view/>
+  <transition name="fade">
+    <UserChooser
+        @userChosen="handleUserChosen($event)"
+        :users="users"
+        :activeUser="activeUser"
+        v-if="displayUserChooser"></UserChooser>
+  </transition>
+  <transition name="fade">
+    <SessionChooser @sessionChosen="activeSession = $event"
+                    @hide="displaySessionChooser = false"
+                    :sessions="sessions"
+                    :activeSession="activeSession"
+                    v-if="displaySessionChooser"></SessionChooser>
+  </transition>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<style lang="sass">
+html
+  font-size: 28px
 
-#nav {
-  padding: 30px;
+body
+  margin: 0
+  font-family: 'Raleway', sans-serif
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.root
+  background: url("assets/img/background.jpg") center
+  background-size: cover
+  width: 100vw
+  height: 100vh
+  overflow: hidden
+  display: flex
+  align-items: center
+  justify-content: center
 
-    &.router-link-exact-active {
-      color: #42b983;
+.fade-enter-active, .fade-leave-active
+  transition: .4s opacity
+
+.fade-enter-from, .fade-leave-to
+  opacity: 0
+</style>
+
+<script>
+import Panel from "./components/Panel";
+import UserChooser from "./components/UserChooser";
+import SessionChooser from "./components/SessionChooser";
+
+export default {
+  components: {SessionChooser, Panel, UserChooser},
+  data: () => {
+    return {
+      'displaySessionChooser': false,
+      'displayUserChooser': false,
+      'sessions': window.lightdm.sessions,
+      'activeSession': window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0],
+      'users': window.lightdm.users,
+      'activeUser': window.lightdm.users[0]
+    }
+  },
+  mounted() {
+    window.lightdm.authentication_complete.connect(() => {
+      if (window.lightdm.is_authenticated) {
+        window.lightdm.start_session(this.activeSession.key)
+      } else {
+        window.lightdm.authenticate(this.activeUser.username)
+      }
+    })
+    this.startNewAuthentication();
+  },
+  methods: {
+    handleUserChosen($event) {
+      this.activeUser = $event;
+    this.displayUserChooser = false;
+      this.startNewAuthentication();
+    },
+    startNewAuthentication() {
+      window.lightdm.cancel_authentication();
+      window.lightdm.authenticate(this.activeUser.username)
     }
   }
 }
-</style>
+</script>
