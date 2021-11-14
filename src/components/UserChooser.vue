@@ -2,7 +2,7 @@
   <Overlay class="user-chooser">
     <div class="user-chooser__wrapper">
       <input id="username" class="user-chooser__input" type="text" placeholder="username" v-model="username"
-             @keypress="showErrorMessage = false" @keyup.enter="chooseUser()" autofocus>
+             @keypress="showErrorMessage = false" @keyup.enter="chooseUser()" @keyup.esc="$emit('userChosen', activeUser)" autofocus>
       <transition name="fade">
         <div v-if="showErrorMessage" class="user-chooser__error-message">This user does not exist.</div>
       </transition>
