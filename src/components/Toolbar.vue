@@ -55,7 +55,7 @@ export default {
 .toolbar
   display: flex
   flex-direction: column
-  background: linear-gradient(183.1deg, #166088 6.21%, #4A6FA5 97.59%)
+  background: linear-gradient(183.1deg, var(--gradient-start-color) 6.21%, var(--gradient-stop-color) 97.59%)
   box-shadow: .5rem .5rem 1rem 0 #000000A0
   border-radius: 1rem
   padding: .5rem 0
@@ -65,7 +65,7 @@ export default {
     flex: 1
 
   .toolbar__icon
-    color: white
+    color: var(--font-color)
     cursor: pointer
     font-size: 2rem
     padding: .3rem .6rem

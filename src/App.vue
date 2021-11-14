@@ -22,18 +22,21 @@
                     :activeSession="activeSession"
                     v-if="displaySessionChooser"></SessionChooser>
   </transition>
+  <transition name="fade">
+    <div v-if="fadeOut" class="fade-out-overlay"></div>
+  </transition>
 </template>
 
 <style lang="sass">
 html
-  font-size: 28px
+  font-size: var(--root-font-size)
 
 body
   margin: 0
   font-family: 'Raleway', sans-serif
 
 .root
-  background: url("assets/img/background.jpg") center
+  background: var(--background-image, url("assets/img/background.jpg")) center
   background-size: cover
   width: 100vw
   height: 100vh
@@ -41,6 +44,15 @@ body
   display: flex
   align-items: center
   justify-content: center
+
+.fade-out-overlay
+  width: 100vw
+  height: 100vh
+  background-color: black
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 100
 
 .fade-enter-active, .fade-leave-active
   transition: .4s opacity
@@ -61,6 +73,7 @@ export default {
       'displaySessionChooser': false,
       'displayUserChooser': false,
       'showWrongPasswordIndicator': false,
+      'fadeOut': false,
       'sessions': window.lightdm.sessions,
       'activeSession': window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0],
       'users': window.lightdm.users,
@@ -70,7 +83,8 @@ export default {
   mounted() {
     window.lightdm.authentication_complete.connect(() => {
       if (window.lightdm.is_authenticated) {
-        window.lightdm.start_session(this.activeSession.key)
+        this.fadeOut = true
+        setTimeout(() => window.lightdm.start_session(this.activeSession.key), 400)
       } else {
         window.lightdm.authenticate(this.activeUser.username)
         this.showWrongPasswordIndicator = true

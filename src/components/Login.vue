@@ -30,7 +30,7 @@ export default {
 
 <style lang="sass" scoped>
 .login
-  background: linear-gradient(129.93deg, #166088 6.58%, #4A6FA5 90.39%)
+  background: linear-gradient(129.93deg, var(--gradient-start-color) 6.58%, var(--gradient-stop-color) 90.39%)
   box-shadow: .5rem .5rem 1rem 0 #000000A0
   display: flex
   justify-content: center
@@ -48,7 +48,7 @@ export default {
 
   .login__name
     font-weight: 300
-    color: white
+    color: var(--font-color)
     font-size: 1.6rem
     margin: 1rem 0 2rem
     text-shadow: .25rem .25rem .5rem #00000060
