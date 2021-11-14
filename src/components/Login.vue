@@ -2,7 +2,9 @@
   <div class="login">
     <img alt="User Icon" class="login__icon" :src="user.image">
     <h1 class="login__name">{{ user.display_name }}</h1>
-    <PasswordPrompt :user="user"
+    <PasswordPrompt @hideWrongPasswordIndicator="hideWrongPasswordIndicator()"
+                    :showWrongPasswordIndicator="showWrongPasswordIndicator"
+                    :user="user"
                     :session="session"></PasswordPrompt>
   </div>
 </template>
@@ -15,7 +17,13 @@ export default {
   components: {PasswordPrompt},
   props: {
     user: Object,
-    session: Object
+    session: Object,
+    showWrongPasswordIndicator: Boolean
+  },
+  methods: {
+    hideWrongPasswordIndicator() {
+      this.$emit('hideWrongPasswordIndicator')
+    }
   }
 }
 </script>
@@ -29,7 +37,7 @@ export default {
   align-items: center
   flex-direction: column
   border-radius: 1rem
-  padding: 3rem 2.5rem
+  padding: 3rem 2.5rem 2rem
 
   .login__icon
     width: 7.5rem

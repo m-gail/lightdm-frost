@@ -1,4 +1,4 @@
-# lightdm-webkit2-greeter-frost
+# lightdm-frost
 
 ## Project setup
 ```

@@ -3,7 +3,9 @@
     <Toolbar class="toolbar"
              v-on:displaySessionChooser="$emit('displaySessionChooser')"
              v-on:displayUserChooser="$emit('displayUserChooser')"></Toolbar>
-    <Login :user="user"
+    <Login @hideWrongPasswordIndicator="hideWrongPasswordIndicator()"
+           :showWrongPasswordIndicator="showWrongPasswordIndicator"
+           :user="user"
            :session="session"></Login>
   </div>
 </template>
@@ -21,7 +23,13 @@ export default {
   ],
   props: {
     user: Object,
-    session: Object
+    session: Object,
+    showWrongPasswordIndicator: Boolean
+  },
+  methods: {
+    hideWrongPasswordIndicator() {
+      this.$emit('hideWrongPasswordIndicator')
+    }
   }
 }
 </script>

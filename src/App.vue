@@ -1,6 +1,8 @@
 <template>
   <div class="root">
     <Panel
+        :showWrongPasswordIndicator="showWrongPasswordIndicator"
+        @hideWrongPasswordIndicator="showWrongPasswordIndicator = false"
         v-on:displaySessionChooser="displaySessionChooser = true"
         v-on:displayUserChooser="displayUserChooser = true"
         :user="activeUser"
@@ -58,6 +60,7 @@ export default {
     return {
       'displaySessionChooser': false,
       'displayUserChooser': false,
+      'showWrongPasswordIndicator': false,
       'sessions': window.lightdm.sessions,
       'activeSession': window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0],
       'users': window.lightdm.users,
@@ -70,15 +73,17 @@ export default {
         window.lightdm.start_session(this.activeSession.key)
       } else {
         window.lightdm.authenticate(this.activeUser.username)
+        this.showWrongPasswordIndicator = true
       }
     })
     this.startNewAuthentication();
   },
   methods: {
     handleUserChosen($event) {
-      this.activeUser = $event;
-    this.displayUserChooser = false;
-      this.startNewAuthentication();
+      this.activeUser = $event
+      this.displayUserChooser = false
+      this.showWrongPasswordIndicator = false
+      this.startNewAuthentication()
     },
     startNewAuthentication() {
       window.lightdm.cancel_authentication();
