@@ -30,6 +30,7 @@ export default {
 
 <style lang="sass" scoped>
 .login
+  backdrop-filter: blur(1rem)
   background: linear-gradient(129.93deg, var(--gradient-start-color) 6.58%, var(--gradient-stop-color) 90.39%)
   box-shadow: .5rem .5rem 1rem 0 #000000A0
   display: flex

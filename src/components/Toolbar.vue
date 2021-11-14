@@ -55,6 +55,7 @@ export default {
 .toolbar
   display: flex
   flex-direction: column
+  backdrop-filter: blur(1rem)
   background: linear-gradient(183.1deg, var(--gradient-start-color) 6.21%, var(--gradient-stop-color) 97.59%)
   box-shadow: .5rem .5rem 1rem 0 #000000A0
   border-radius: 1rem
