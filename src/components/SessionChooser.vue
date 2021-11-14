@@ -5,7 +5,7 @@
          :class="{'session-chooser__session': true, 'session-chooser__session--active': activeSession.key === session.key}"
          @click="$emit('sessionChosen', session)">{{ session.name }}
     </div>
-    <div class="session-chooser__submit" @click="$emit('hide')">Select</div>
+    <div class="session-chooser__submit" @click="$emit('hide')">Confirm</div>
   </Overlay>
 </template>
 
