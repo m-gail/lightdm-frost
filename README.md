@@ -75,7 +75,7 @@ greeter:
 
 ## Configuration
 
-The configuration is done using a css file:
+The configuration is done using a css file located at `/usr/share/web-greeter/themes/frost/config/config.css`:
 ```
 :root {
     --font-color: white;
