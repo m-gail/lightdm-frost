@@ -69,13 +69,14 @@ import SessionChooser from "./components/SessionChooser";
 export default {
   components: {SessionChooser, Panel, UserChooser},
   data: () => {
+    let activeSession = window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0] ?? window.lightdm.sessions[0];
     return {
       'displaySessionChooser': false,
       'displayUserChooser': false,
       'showWrongPasswordIndicator': false,
       'fadeOut': false,
       'sessions': window.lightdm.sessions,
-      'activeSession': window.lightdm.sessions.filter(session => session.key === window.lightdm.users[0].session)[0],
+      'activeSession': activeSession,
       'users': window.lightdm.users,
       'activeUser': window.lightdm.users[0]
     }
