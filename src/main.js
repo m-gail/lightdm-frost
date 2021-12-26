@@ -7,9 +7,9 @@ import '@fontsource/raleway/300.css'
 import '@fontsource/raleway/700.css'
 
 import {library} from '@fortawesome/fontawesome-svg-core'
-import {faPowerOff, faRedoAlt, faBed, faUsers, faWindowRestore, faAngleRight, faMoon} from '@fortawesome/free-solid-svg-icons'
+import {faPowerOff, faRedoAlt, faBed, faUsers, faWindowRestore, faAngleRight, faMoon, faEye, faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 
-library.add(faPowerOff, faRedoAlt, faBed, faUsers, faWindowRestore, faAngleRight, faMoon)
+library.add(faPowerOff, faRedoAlt, faBed, faUsers, faWindowRestore, faAngleRight, faMoon, faEye, faEyeSlash)
 
 window.addEventListener('GreeterReady', () => {
     createApp(App).use(router).mount('#app')

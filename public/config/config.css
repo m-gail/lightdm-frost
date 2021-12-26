@@ -1,9 +1,8 @@
 :root {
     --font-color: white;
     --font-color-darkened: #e7e7e7;
-    --gradient-start-color: rgba(22, 96, 136, .35);
-    --gradient-stop-color: rgba(74, 111, 165, .35);
-    --root-font-size: 36px;
-    --background-image: url("/usr/share/backgrounds/frozen_forest.jpg");
+    --gradient-start-color: #166088;
+    --gradient-stop-color: #4A6FA5;
+    --root-font-size: 2.5vh;
 }
 

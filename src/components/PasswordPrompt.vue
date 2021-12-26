@@ -1,8 +1,11 @@
 <template>
   <div class="password-section">
     <div class="password-prompt">
-      <input v-model="password" class="password-prompt__input" type="password" placeholder="password"
-             @keyup.enter="login()" @keypress="hideWrongPasswordIndicator()" autofocus>
+      <div class='password-prompt__input-container'>
+        <input v-model="password" class="password-prompt__input" :type="displayPassword ? 'text' : 'password'" placeholder="password"
+                @keyup.enter="login()" @keypress="hideWrongPasswordIndicator()" autofocus>
+        <font-awesome-icon class="password-prompt__eye" :icon="['fas', displayPassword ? 'eye-slash' : 'eye']" @click="displayPassword = !displayPassword"></font-awesome-icon>
+      </div>
       <div class="password-prompt__confirm" @click="login()">
         <font-awesome-icon class="password-prompt__icon" :icon="['fas', 'angle-right']"></font-awesome-icon>
       </div>
@@ -21,7 +24,8 @@ export default {
   name: "PasswordPrompt",
   data: () => {
     return {
-      password: ""
+      password: "",
+      displayPassword: false
     }
   },
   props: {
@@ -51,26 +55,42 @@ export default {
   .password-prompt
     display: flex
 
-    .password-prompt__input
+    .password-prompt__input-container
       border: 1px solid var(--font-color)
-      background: transparent
       border-radius: .75rem
-      margin-right: .5rem
       padding: .25rem .5rem
-      font-size: 1rem
-      color: var(--font-color)
-      text-align: center
+      margin-right: .5rem
       width: 10rem
       box-shadow: .25rem .25rem .5rem 0 #00000060
       text-shadow: .25rem .25rem .5rem #00000060
-      font-weight: 300
-      font-family: "Raleway", sans-serif
+      display: flex
+      align-items: center
 
-      &:focus
-        outline: none
+      .password-prompt__input
+        border: none
+        background: transparent
+        font-size: 1rem
+        color: var(--font-color)
+        text-align: center
+        font-weight: 300
+        font-family: "Raleway", sans-serif
+        flex: 1
+        width: 100%
 
-      &::placeholder
-        color: var(--font-color-darkened)
+        &:focus
+          outline: none
+
+        &::placeholder
+          color: var(--font-color-darkened)
+      
+      .password-prompt__eye
+        color: var(--font-color)
+        font-size: .6rem
+        cursor: pointer
+        width: 1rem
+        text-align: center
+        transition: .4s opacity
+
 
     .password-prompt__confirm
       display: flex
