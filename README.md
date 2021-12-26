@@ -48,10 +48,10 @@ Default Config
 ## Installation
 
 1. Set up the requirements
-2. Download the [built archive](https://gitlab.com/ihciM/lightdm-frost/-/releases/v0.1.0)
+2. Download the [built archive](https://gitlab.com/ihciM/lightdm-frost/-/releases/v0.1.1)
 3. Extract the archive
 ```
-tar -xf lightdm-frost-v0.1.0.tar.gz
+tar -xf lightdm-frost-v0.1.1.tar.gz
 ```
 4. Move the dist folder to `/usr/share/web-greeter/themes/frost` make sure there is no dist subdirectory in this location
 ```
