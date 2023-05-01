@@ -48,7 +48,10 @@ Default Config
 ## Installation
 
 1. Set up the requirements
-2. Download the [built archive](https://gitlab.com/ihciM/lightdm-frost/-/releases/v0.1.1)
+2. Download the [built archive](https://github.com/m-gail/lightdm-frost/releases/download/v0.1.1/lightdm-frost-v0.1.1.tar.gz)
+```
+wget https://github.com/m-gail/lightdm-frost/releases/download/v0.1.1/lightdm-frost-v0.1.1.tar.gz
+```
 3. Extract the archive
 ```
 tar -xf lightdm-frost-v0.1.1.tar.gz
