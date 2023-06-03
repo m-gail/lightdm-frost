@@ -1,9 +1,15 @@
 <template>
-  <Overlay class="session-chooser">
-    <div :key="session.id"
-         v-for="session of sessions"
-         :class="{'session-chooser__session': true, 'session-chooser__session--active': activeSession.key === session.key}"
-         @click="$emit('sessionChosen', session)">{{ session.name }}
+  <Overlay class="session-chooser" :keydown="keyDownHandler">
+    <div
+      :key="session.id"
+      v-for="session of sessions"
+      :class="{
+        'session-chooser__session': true,
+        'session-chooser__session--active': activeSession.key === session.key,
+      }"
+      @click="$emit('sessionChosen', session)"
+    >
+      {{ session.name }}
     </div>
     <div class="session-chooser__submit" @click="$emit('hide')">Confirm</div>
   </Overlay>
@@ -14,16 +20,18 @@ import Overlay from "./Overlay";
 
 export default {
   name: "SessionChooser",
-  components: {Overlay},
+  components: { Overlay },
   props: {
     sessions: Array,
-    activeSession: Object
+    activeSession: Object,
   },
-  emits: [
-      'sessionChosen',
-      'hide'
-  ]
-}
+  emits: ["sessionChosen", "hide"],
+  methods: {
+    keyDownHandler: function(event) {
+
+    }
+  },
+};
 </script>
 
 <style lang="sass" scoped>
@@ -49,5 +57,4 @@ export default {
     cursor: pointer
     padding: .25rem 1rem
     color: white
-
 </style>
